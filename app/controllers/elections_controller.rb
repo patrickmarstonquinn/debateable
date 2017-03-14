@@ -1,6 +1,6 @@
 class ElectionsController < ApplicationController
   def index
-    @elections = Election.all
+    @elections = Election.page(params[:page]).per(10)
 
     render("elections/index.html.erb")
   end
