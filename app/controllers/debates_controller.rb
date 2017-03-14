@@ -1,4 +1,14 @@
 class DebatesController < ApplicationController
+  before_action :current_user_must_be_debate_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_debate_user
+    debate = Debate.find(params[:id])
+
+    unless current_user == debate.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @debates = Debate.all
 
