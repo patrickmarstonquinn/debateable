@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "elections#index"
   # Routes for the Favorite resource:
   # CREATE
   get "/favorites/new", :controller => "favorites", :action => "new"
