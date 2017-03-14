@@ -1,0 +1,91 @@
+<!-- Validation failure messages -->
+<% if @debate.errors.any? %>
+  <% @debate.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Debate #<%= @debate.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_debate/<%= @debate.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for liburl -->
+      <div class="form-group">
+        <label for="liburl" class="control-label">
+          Liburl
+        </label>
+
+        <input type="text" id="liburl" name="liburl" placeholder="Liburl" class="form-control" value="<%= @debate.liburl %>">
+      </div>
+
+      <!-- Label and input for libtitle -->
+      <div class="form-group">
+        <label for="libtitle" class="control-label">
+          Libtitle
+        </label>
+
+        <input type="text" id="libtitle" name="libtitle" placeholder="Libtitle" class="form-control" value="<%= @debate.libtitle %>">
+      </div>
+
+      <!-- Label and input for conurl -->
+      <div class="form-group">
+        <label for="conurl" class="control-label">
+          Conurl
+        </label>
+
+        <input type="text" id="conurl" name="conurl" placeholder="Conurl" class="form-control" value="<%= @debate.conurl %>">
+      </div>
+
+      <!-- Label and input for contitle -->
+      <div class="form-group">
+        <label for="contitle" class="control-label">
+          Contitle
+        </label>
+
+        <input type="text" id="contitle" name="contitle" placeholder="Contitle" class="form-control" value="<%= @debate.contitle %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @debate.user_id %>">
+      </div>
+
+      <!-- Label and input for topic -->
+      <div class="form-group">
+        <label for="topic" class="control-label">
+          Topic
+        </label>
+
+        <input type="text" id="topic" name="topic" placeholder="Topic" class="form-control" value="<%= @debate.topic %>">
+      </div>
+
+      <!-- Label and input for electionid -->
+      <div class="form-group">
+        <label for="electionid" class="control-label">
+          Electionid
+        </label>
+
+        <input type="text" id="electionid" name="electionid" placeholder="Electionid" class="form-control" value="<%= @debate.electionid %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Debate
+      </button>
+      or
+      <a href="/debates/<%= @debate.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

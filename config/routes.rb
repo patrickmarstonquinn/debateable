@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Debate resource:
+  # CREATE
+  get "/debates/new", :controller => "debates", :action => "new"
+  post "/create_debate", :controller => "debates", :action => "create"
+
+  # READ
+  get "/debates", :controller => "debates", :action => "index"
+  get "/debates/:id", :controller => "debates", :action => "show"
+
+  # UPDATE
+  get "/debates/:id/edit", :controller => "debates", :action => "edit"
+  post "/update_debate/:id", :controller => "debates", :action => "update"
+
+  # DELETE
+  get "/delete_debate/:id", :controller => "debates", :action => "destroy"
+  #------------------------------
+
   # Routes for the Election resource:
   # CREATE
   get "/elections/new", :controller => "elections", :action => "new"
