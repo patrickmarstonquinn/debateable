@@ -21,7 +21,7 @@
         <td><%= comment.user.email %></td>
         <td><%= comment.title %></td>
         <td><%= comment.body %></td>
-        <td><%= comment.debate_id %></td>
+        <td><%= comment.debate.liburl %></td>
         <td>
           <a href="/comments/<%= comment.id %>" class="btn btn-primary">Show</a>
           <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">Edit</a>
