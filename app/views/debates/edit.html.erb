@@ -54,14 +54,8 @@
         <input type="text" id="contitle" name="contitle" placeholder="Contitle" class="form-control" value="<%= @debate.contitle %>">
       </div>
 
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email, @debate.user_id), :class => "form-control") %>
-      </div>
+      
+      
 
       <!-- Label and input for topic -->
       <div class="form-group">
