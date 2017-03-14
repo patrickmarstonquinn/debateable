@@ -16,6 +16,8 @@ class DebatesController < ApplicationController
   end
 
   def show
+    @favorite = Favorite.new
+    @comment = Comment.new
     @debate = Debate.find(params[:id])
 
     render("debates/show.html.erb")
