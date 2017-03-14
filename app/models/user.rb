@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :picture, PictureUploader
+
   # Direct associations
 
   has_many   :favorites,
