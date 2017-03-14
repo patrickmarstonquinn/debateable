@@ -18,7 +18,13 @@
       <dd><%= @debate.contitle %></dd>
 
       <dt>User</dt>
-      <dd><%= @debate.user_id %></dd>
+      <dd>
+        <% if @debate.user.present? %>
+          <a href="/users/<%= @debate.user_id %>">
+            <%= @debate.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Topic</dt>
       <dd><%= @debate.topic %></dd>

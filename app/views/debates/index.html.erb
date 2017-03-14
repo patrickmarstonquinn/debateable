@@ -25,7 +25,13 @@
         <td><%= debate.libtitle %></td>
         <td><%= debate.conurl %></td>
         <td><%= debate.contitle %></td>
-        <td><%= debate.user.email %></td>
+        <td>
+          <% if debate.user.present? %>
+            <a href="/users/<%= debate.user.id %>">
+              <%= debate.user.email %>
+            </a>
+          <% end %>
+        </td>
         <td><%= debate.topic %></td>
         <td><%= debate.electionid %></td>
         <td>
