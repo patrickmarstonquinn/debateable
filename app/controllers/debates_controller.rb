@@ -10,7 +10,8 @@ class DebatesController < ApplicationController
   end
 
   def index
-    @debates = Debate.page(params[:page]).per(10)
+    @q = Debate.ransack(params[:q])
+    @debates = @q.result(:distinct => true).includes(:user, :comments, :favorites).page(params[:page]).per(10)
 
     render("debates/index.html.erb")
   end

@@ -1,6 +1,7 @@
 class ElectionsController < ApplicationController
   def index
-    @elections = Election.page(params[:page]).per(10)
+    @q = Election.ransack(params[:q])
+    @elections = @q.result(:distinct => true).page(params[:page]).per(10)
 
     render("elections/index.html.erb")
   end
