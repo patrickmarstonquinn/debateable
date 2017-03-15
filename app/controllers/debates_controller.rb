@@ -17,6 +17,8 @@ class DebatesController < ApplicationController
   end
 
   def show
+    @q = Debate.ransack(params[:q])
+    @debates = @q.result(:distinct => true).includes(:user, :comments, :favorites).page(params[:page]).per(10)
     @favorite = Favorite.new
     @comment = Comment.new
     @debate = Debate.find(params[:id])

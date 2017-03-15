@@ -1,21 +1,26 @@
 <div class="page-header">
-  <h3>User #<%= @user.id %></h3>
+  <h3>
+
+    <%= @user.name %>
+
+    <!-- < if current_user == debate.user %> -->
+    <!-- <a href="/debates/<= user.id %>/edit" class="btn btn-lg btn-warning">Edit</a> -->
+    <!-- < end %> -->
+
+  </h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Email</dt>
+      <dt>Contact Email</dt>
       <dd><%= @user.email %></dd>
 
-      <dt>Password</dt>
-      <dd><%= @user.password %></dd>
+      <!-- <dt>Picture</dt>
+      <dd><img src="<%= @user.picture %>" class="img-responsive"></dd> -->
 
-      <dt>Picture</dt>
-      <dd><img src="<%= @user.picture %>" class="img-responsive"></dd>
-
-      <dt>Name</dt>
-      <dd><%= @user.name %></dd>
+      <!-- <dt>Name</dt>
+      <dd><%= @user.name %></dd> -->
 
       <dt>Bio</dt>
       <dd><%= @user.bio %></dd>
@@ -40,24 +45,24 @@
       </li>
 
       <% @user.debates.each do |debate| %>
-        <li class="list-group-item">
-          <a href="/debates/<%= debate.id %>">
-            <%= debate.liburl %>
+      <li class="list-group-item">
+        <a href="/debates/<%= debate.id %>">
+          <%= debate.topic %>
+        </a>
+        <div class="btn-group btn-group-xs pull-right">
+          <a href="/debates/<%= debate.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/debates/<%= debate.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == debate.user %>
-              <a href="/debates/<%= debate.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_debate/<%= debate.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
+          <%if current_user == debate.user %>
+          <a href="/debates/<%= debate.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a href="/delete_debate/<%= debate.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+          <% end %>
+        </div>
+      </li>
       <% end %>
     </ul>
   </div>
@@ -73,24 +78,24 @@
       </li>
 
       <% @user.comments.each do |comment| %>
-        <li class="list-group-item">
-          <a href="/comments/<%= comment.id %>">
-            <%= comment.user_id %>
+      <li class="list-group-item">
+        <a href="/comments/<%= comment.id %>">
+          <%= comment.user_id %>
+        </a>
+        <div class="btn-group btn-group-xs pull-right">
+          <a href="/comments/<%= comment.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/comments/<%= comment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == comment.user %>
-              <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
+          <%if current_user == comment.user %>
+          <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+          <% end %>
+        </div>
+      </li>
       <% end %>
     </ul>
   </div>
@@ -106,24 +111,24 @@
       </li>
 
       <% @user.favorites.each do |favorite| %>
-        <li class="list-group-item">
-          <a href="/favorites/<%= favorite.id %>">
-            <%= favorite.debate_id %>
+      <li class="list-group-item">
+        <a href="/favorites/<%= favorite.id %>">
+          <%= favorite.debate_id %>
+        </a>
+        <div class="btn-group btn-group-xs pull-right">
+          <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == favorite.user %>
-              <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
+          <%if current_user == favorite.user %>
+          <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+          <% end %>
+        </div>
+      </li>
       <% end %>
     </ul>
   </div>

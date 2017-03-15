@@ -3,6 +3,11 @@ class ElectionsController < ApplicationController
     @q = Election.ransack(params[:q])
     @elections = @q.result(:distinct => true).page(params[:page]).per(10)
 
+
+    url = "https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAD7xaBeiFVkhadoR87jbvSgJ0YuIAWBD4"
+
+    # instert election index
+
     render("elections/index.html.erb")
   end
 
@@ -74,5 +79,9 @@ class ElectionsController < ApplicationController
     else
       redirect_back(:fallback_location => "/", :notice => "Election deleted.")
     end
+  end
+
+  def mine
+
   end
 end

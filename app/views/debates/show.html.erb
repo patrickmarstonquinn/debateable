@@ -1,21 +1,16 @@
 <div class="page-header">
-  <h3>Debate #<%= @debate.id %></h3>
+  <h3><%= @debate.topic %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Liburl</dt>
-      <dd><%= @debate.liburl %></dd>
 
-      <dt>Libtitle</dt>
-      <dd><%= @debate.libtitle %></dd>
+      <dt>Liberal Take</dt>
+      <dd><a href="<%= @debate.liburl %>"><%= @debate.libtitle %></a></dd>
 
-      <dt>Conurl</dt>
-      <dd><%= @debate.conurl %></dd>
-
-      <dt>Contitle</dt>
-      <dd><%= @debate.contitle %></dd>
+      <dt>Conservative Take</dt>
+      <dd><a href="<%= @debate.conurl %>"><%= @debate.contitle %></a></dd>
 
       <dt>User</dt>
       <dd>
