@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   post "/update_election/:id", :controller => "elections", :action => "update"
   # DELETE
   get "/delete_election/:id", :controller => "elections", :action => "destroy"
+
   get "/my_elections", :controller => "elections", :action => "mine"
   #------------------------------
 

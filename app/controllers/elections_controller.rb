@@ -7,6 +7,12 @@ class ElectionsController < ApplicationController
     url = "https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyAD7xaBeiFVkhadoR87jbvSgJ0YuIAWBD4"
 
     # instert election index
+    @parsed_data = JSON.parse(open(url).read)
+    @upelections = @parsed_data["elections"]
+    # @id = @parsed_data["elections"]["id"]
+    # @name = @upelections["name"]
+    # @name = @parsed_data["elections"]["name"]
+    # @electionday = @parsed_data["elections"]["electionday"]
 
     render("elections/index.html.erb")
   end
@@ -83,5 +89,17 @@ class ElectionsController < ApplicationController
 
   def mine
 
+    @street_address = params[:user_street_address]
+    @street = @street_address.gsub(' ', '+')
+    url = "https://www.googleapis.com/civicinfo/v2/voterinfo?key=AIzaSyAD7xaBeiFVkhadoR87jbvSgJ0YuIAWBD4&address=" << @street << "&sensor=false"
+    @parsed_data = JSON.parse(open(url).read)
+    @name = @parsed_data["pollingLocations"][0]["address"]["locationName"]
+    @line1 = @parsed_data["pollingLocations"][0]["address"]["line1"]
+    @city = @parsed_data["pollingLocations"][0]["address"]["city"]
+    @state = @parsed_data["pollingLocations"][0]["address"]["state"]
+    @zip = @parsed_data["pollingLocations"][0]["address"]["zip"]
+
+    @hours = @parsed_data["pollingLocations"][0]["pollingHours"]
+    render("elections/mine.html.erb")
   end
 end
