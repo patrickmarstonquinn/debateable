@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Comment #<%= @comment.id %></h3>
+  <h3>Edit "<%= @comment.title %>"</h3>
 </div>
 
 <div class="row">
@@ -19,13 +19,8 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email, @comment.user_id), :class => "form-control") %>
-      </div>
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
       <!-- Label and input for title -->
       <div class="form-group">
@@ -51,14 +46,15 @@
           Debate
         </label>
 
-        <%= select_tag(:debate_id, options_from_collection_for_select(Debate.all, :id, :liburl, @comment.debate_id), :class => "form-control") %>
+        <%= select_tag(:debate_id, options_from_collection_for_select(Debate.all, :id, :topic, @comment.debate_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
         Update Comment
       </button>
       or
-      <a href="/comments/<%= @comment.id %>">Cancel</a>
+      <a href="/debates/<%= @comment.id %>">Cancel</a>
+      
     </form>
   </div>
 </div>

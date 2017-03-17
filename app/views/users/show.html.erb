@@ -74,7 +74,7 @@
       <% @user.comments.each do |comment| %>
       <li class="list-group-item">
         On <a href="/comments/<%= comment.id %>">
-          <%= Debate.find(comment).topic %>:
+          <%= Debate.find(comment.debate_id).topic %>:
         </a>
           <%= comment.body %>
 
@@ -99,8 +99,8 @@
 
 <!-- A User has many favorites -->
 
-<div class="row">
-  <div class="col-md-12">
+<!-- <div class="row"> -->
+  <!-- <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
         <%= @user.name %>'s Favorites
@@ -126,7 +126,7 @@
         </div>
       </li>
       <% end %>
-    </ul>
+    </ul> -->
 
     <div class="btn-group btn-group-justified">
       <a href="/users" class="btn btn-primary">

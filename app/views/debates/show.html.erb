@@ -1,6 +1,6 @@
 <div class="page-header">
   <h3><%= @debate.topic %></h3>
-  
+
 </div>
 
 
@@ -18,9 +18,9 @@
       <dt>Submitted By</dt>
       <dd>
         <% if @debate.user.present? %>
-          <a href="/users/<%= @debate.user_id %>">
-            <%= @debate.user.name %>
-          </a>
+        <a href="/users/<%= @debate.user_id %>">
+          <%= @debate.user.name %>
+        </a>
         <% end %>
       </dd>
 
@@ -31,19 +31,7 @@
       <!-- <dd><= @debate.electionid %></dd> -->
 
     </dl>
-    <div class="btn-group btn-group-justified">
-      <a href="/debates" class="btn btn-primary">
-        Back
-      </a>
-      <% if current_user == @debate.user %>
-        <a href="/debates/<%= @debate.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_debate/<%= @debate.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
-    </div>
+
 
   </div>
 
@@ -51,129 +39,160 @@
 </div>
 
 <!-- A Debate has many comments -->
+<h3>Comments</h3>
 
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
+      <!-- <li class="list-group-item list-group-item-info">
         Comments
-      </li>
+      </li> -->
 
-      <% @debate.comments.each do |comment| %>
-        <li class="list-group-item">
-          <!-- <a href="/comments/<%= comment.id %>"> -->
+    <% @debate.comments.each do |comment| %>
+    <li class="media">
+      <div class="media-body">
+        <h6 class="media-heading">
+          <%= User.find(comment.user_id).name %>
+          <small>
             <%= comment.title %>
-            <%= comment.body %>
-            <%= User.find(comment.user_id).name %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/comments/<%= comment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
+            <% if comment.user == current_user %>
+            <a href="/comments/<%= comment.id %>/edit">
               <i class="fa fa-edit"></i>
             </a>
-            <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
+            <a href="/delete_comment/<%= comment.id %>">
+              <i class="fa fa-trash"></i>
             </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_comment" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
+            <% end %>
+          </small>
+        </h6>
+        <%= comment.body %>
       </div>
+    </li>
+    <% end %>
 
-      <!-- Label and input for title -->
-      <div class="form-group">
-        <label for="title" class="control-label">
-          Title
-        </label>
+    <li class="media">
+                <div class="media-body">
+                  <form action="/create_comment" method="post">
+                    <!-- Hidden input for authenticity token to protect from forgery -->
+                    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="">
-      </div>
+                    <!-- Label and input for debate_id -->
+                    <input type="hidden" name="debate_id" value="<%= @debate.id %>">
 
-      <!-- Label and input for body -->
-      <div class="form-group">
-        <label for="body" class="control-label">
-          Body
-        </label>
 
-        <input type="text" id="body" name="body" placeholder="Body" class="form-control" value="">
-      </div>
+                    <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
-      <!-- Label and input for debate_id -->
-      <input type="hidden" name="debate_id" value="<%= @debate.id %>">
+                  
 
-      <button class="btn btn-block btn-success">
-        Create Comment
-      </button>
-    </form>
-      </li>
-    </ul>
+                    <!-- Label and input for body -->
+                    <div class="form-group">
+                      <label for="body" class="sr-only">
+                        Body
+                      </label>
+
+                      <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                    </div>
+                  </form>
+                </div>
+              </li>
+
+    <!-- <li class="list-group-item">
+      <form action="/create_comment" method="post">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+        <div class="form-group">
+          <label for="title" class="control-label">
+            Title
+          </label>
+
+          <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="">
+        </div>
+
+        <div class="form-group">
+          <label for="body" class="control-label">
+            Body
+          </label>
+
+          <input type="text" id="body" name="body" placeholder="Body" class="form-control" value="">
+        </div>
+
+        <input type="hidden" name="debate_id" value="<%= @debate.id %>">
+
+        <button class="btn btn-block btn-success">
+          Create Comment
+        </button>
+      </form>
+    </li> -->
+  </ul>
+  <div class="btn-group btn-group-justified">
+    <a href="/debates" class="btn btn-primary">
+      Back
+    </a>
+    <% if current_user == @debate.user %>
+    <a href="/debates/<%= @debate.id %>/edit" class="btn btn-warning">
+      Edit
+    </a>
+    <a href="/delete_debate/<%= @debate.id %>" class="btn btn-danger" rel="nofollow">
+      Delete
+    </a>
+    <% end %>
   </div>
+</div>
 </div>
 
 <!-- A Debate has many favorites -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Favorites
-      </li>
-
-      <% @debate.favorites.each do |favorite| %>
-        <li class="list-group-item">
-          <a href="/favorites/<%= favorite.id %>">
-            <%= favorite.debate_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_favorite" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for debate_id -->
-      <input type="hidden" name="debate_id" value="<%= @debate.id %>">
-
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
-      </div>
-
-      <button class="btn btn-block btn-success">
-        Create Favorite
-      </button>
-    </form>
-      </li>
-    </ul>
-  </div>
+<!-- <div class="row">
+<div class="col-md-12">
+<ul class="list-group">
+<li class="list-group-item list-group-item-info">
+Favorites
+</li> -->
+<!--
+<% @debate.favorites.each do |favorite| %>
+<li class="list-group-item">
+<a href="/favorites/<%= favorite.id %>">
+<%= favorite.debate_id %>
+</a>
+<div class="btn-group btn-group-xs pull-right">
+<a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
+<i class="fa fa-search-plus"></i>
+</a>
+<a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
+<i class="fa fa-edit"></i>
+</a>
+<a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
+<i class="fa fa-trash-o"></i>
+</a>
 </div>
+</li>
+<% end %> -->
+
+<!-- <li class="list-group-item">
+<form action="/create_favorite" method="post"> -->
+<!-- Hidden input for authenticity token to protect from forgery -->
+<!-- <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> -->
+
+<!-- Label and input for debate_id -->
+<!-- <input type="hidden" name="debate_id" value="<%= @debate.id %>"> -->
+
+<!-- Label and input for user_id -->
+<!-- <div class="form-group">
+<label for="user_id" class="control-label">
+User
+</label>
+
+<%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
+</div>
+
+<button class="btn btn-block btn-success">
+Create Favorite
+</button>
+</form>
+</li>
+</ul>
+</div>
+</div> -->
