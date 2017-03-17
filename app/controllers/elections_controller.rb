@@ -109,8 +109,14 @@ class ElectionsController < ApplicationController
     @city = @parsed_data["pollingLocations"][0]["address"]["city"]
     @state = @parsed_data["pollingLocations"][0]["address"]["state"]
     @zip = @parsed_data["pollingLocations"][0]["address"]["zip"]
-
     @hours = @parsed_data["pollingLocations"][0]["pollingHours"]
+
+    @electionname = @parsed_data["election"]["name"]
+    @electionday = @parsed_data["election"]["electionDay"]
+
+    @register = @parsed_data["state"][0]["electionAdministrationBody"]["electionRegistrationUrl"]
+    @info = @parsed_data["state"][0]["electionAdministrationBody"]["electionInfoUrl"]
+
     render("elections/mine.html.erb")
   end
 end
