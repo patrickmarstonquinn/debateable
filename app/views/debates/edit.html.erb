@@ -54,7 +54,8 @@
         <input type="text" id="contitle" name="contitle" placeholder="Contitle" class="form-control" value="<%= @debate.contitle %>">
       </div>
 
-
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
 
       <!-- Label and input for topic -->

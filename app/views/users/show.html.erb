@@ -3,9 +3,7 @@
 
     <%= @user.name %>
 
-    <!-- < if current_user == debate.user %> -->
-    <!-- <a href="/debates/<= user.id %>/edit" class="btn btn-lg btn-warning">Edit</a> -->
-    <!-- < end %> -->
+
 
   </h3>
 </div>
@@ -27,11 +25,7 @@
 
     </dl>
 
-    <div class="btn-group btn-group-justified">
-      <a href="/users" class="btn btn-primary">
-        Back
-      </a>
-    </div>
+
   </div>
 </div>
 
@@ -41,7 +35,7 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Debates
+      <%= @user.name %>'s  Debates
       </li>
 
       <% @user.debates.each do |debate| %>
@@ -74,14 +68,16 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Comments
+        <%= @user.name %>'s Comments
       </li>
 
       <% @user.comments.each do |comment| %>
       <li class="list-group-item">
-        <a href="/comments/<%= comment.id %>">
-          <%= comment.user_id %>
+        On <a href="/comments/<%= comment.id %>">
+          <%= Debate.find(comment).topic %>:
         </a>
+          <%= comment.body %>
+
         <div class="btn-group btn-group-xs pull-right">
           <a href="/comments/<%= comment.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
@@ -107,13 +103,13 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Favorites
+        <%= @user.name %>'s Favorites
       </li>
 
       <% @user.favorites.each do |favorite| %>
       <li class="list-group-item">
         <a href="/favorites/<%= favorite.id %>">
-          <%= favorite.debate_id %>
+          <%= Debate.find(favorite.debate_id).topic %>
         </a>
         <div class="btn-group btn-group-xs pull-right">
           <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
@@ -131,5 +127,10 @@
       </li>
       <% end %>
     </ul>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/users" class="btn btn-primary">
+        Back
+      </a>
   </div>
 </div>

@@ -1,18 +1,6 @@
 <div class="page-header">
   <h3><%= @debate.topic %></h3>
-  <div class="btn-group btn-group-justified">
-    <a href="/debates" class="btn btn-primary">
-      Back
-    </a>
-    <% if current_user == @debate.user %>
-      <a href="/debates/<%= @debate.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_debate/<%= @debate.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    <% end %>
-  </div>
+  
 </div>
 
 
@@ -27,11 +15,11 @@
       <dt>Conservative Take</dt>
       <dd><a href="<%= @debate.conurl %>"><%= @debate.contitle %></a></dd>
 
-      <dt>User</dt>
+      <dt>Submitted By</dt>
       <dd>
         <% if @debate.user.present? %>
           <a href="/users/<%= @debate.user_id %>">
-            <%= @debate.user.email %>
+            <%= @debate.user.name %>
           </a>
         <% end %>
       </dd>
@@ -43,9 +31,23 @@
       <!-- <dd><= @debate.electionid %></dd> -->
 
     </dl>
-
+    <div class="btn-group btn-group-justified">
+      <a href="/debates" class="btn btn-primary">
+        Back
+      </a>
+      <% if current_user == @debate.user %>
+        <a href="/debates/<%= @debate.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_debate/<%= @debate.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
+    </div>
 
   </div>
+
+
 </div>
 
 <!-- A Debate has many comments -->
