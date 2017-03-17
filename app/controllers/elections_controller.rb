@@ -9,6 +9,17 @@ class ElectionsController < ApplicationController
     # instert election index
     @parsed_data = JSON.parse(open(url).read)
     @upelections = @parsed_data["elections"]
+
+    # upelections.each do |the_election|
+    #   @test = the_election.first.split(' ')
+    #   Myelections.create
+    # end
+
+# deach do |k|
+#   temp = k.first.split(' ')
+#   Course.create(name: k.last["name"], dept_code: temp.last, department: temp.first)
+# end
+
     # @id = @parsed_data["elections"]["id"]
     # @name = @upelections["name"]
     # @name = @parsed_data["elections"]["name"]

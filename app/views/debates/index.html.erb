@@ -1,7 +1,11 @@
 <div class="page-header">
   <h1>
     Ongoing Debates
-    <a href="/debates/new" class="btn btn-lg btn-success">New Debate</a>
+    <form method="get" action="/debates/new" >
+      <button action="/debates/new" type="submit" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a new debate
+      </button>
+    </form>
   </h1>
 </div>
 
@@ -104,7 +108,7 @@
         <th>Conservative Take</th>
         <th>Added By</th>
         <!-- <th>Electionid</th> -->
-        <th>Actions</th>
+        <!-- <th>Actions</th> -->
       </tr>
 
       <% @debates.each do |debate| %>
@@ -120,17 +124,17 @@
           <% end %>
         </td>
         <!-- <td><%= debate.electionid %></td> -->
-        <td>
-          <a href="/debates/<%= debate.id %>" class="btn btn-primary">Show</a>
+        <!-- <td>
+        <a href="/debates/<%= debate.id %>" class="btn btn-primary">Show</a>
 
-          <% if current_user == debate.user %>
-          <a href="/debates/<%= debate.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_debate/<%= debate.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-    <%= paginate @debates, theme: 'twitter-bootstrap-4' %>
-  </div>
+        <% if current_user == debate.user %>
+        <a href="/debates/<%= debate.id %>/edit" class="btn btn-warning">Edit</a>
+        <a href="/delete_debate/<%= debate.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        <% end %>
+      </td> -->
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @debates, theme: 'twitter-bootstrap-4' %>
+</div>
 </div>

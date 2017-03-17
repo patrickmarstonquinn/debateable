@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @favorite.errors.any? %>
-  <% @favorite.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @favorite.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -24,7 +24,7 @@
           Debate
         </label>
 
-        <%= select_tag(:debate_id, options_from_collection_for_select(Debate.all, :id, :liburl, @favorite.debate_id), :class => "form-control") %>
+        <%= select_tag(:debate_id, options_from_collection_for_select(Debate.all, :id, :topic, @favorite.debate_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for user_id -->
@@ -33,7 +33,10 @@
           User
         </label>
 
-        <input type="hidden" value="<%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email, @favorite.user_id), :class => "form-control") %>" >
+        <!-- <input type="hidden" value="%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email, @favorite.user_id), :class => "form-control") %>" > -->
+
+        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email, @favorite.user_id), :class => "form-control") %>
+
       </div>
 
       <button class="btn btn-success">

@@ -72,7 +72,7 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Debate</th>
+        <th>Debate Topic</th>
         <th>User</th>
         <th>Actions</th>
       </tr>
@@ -82,7 +82,7 @@
         <td>
           <% if favorite.debate.present? %>
             <a href="/debates/<%= favorite.debate.id %>">
-              <%= favorite.debate.liburl %>
+              <%= favorite.debate.topic %>
             </a>
           <% end %>
         </td>
